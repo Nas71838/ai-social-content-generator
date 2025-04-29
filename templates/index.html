@@ -1,1 +1,71 @@
 
+<!doctype html>
+<html>
+<head>
+    <title>ContentGenie - Social Media Assistant</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; max-width: 700px; }
+        h1 { color: #333; }
+        textarea, input, select { width: 100%; padding: 8px; margin-top: 6px; margin-bottom: 16px; }
+        button { padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 5px; }
+        .output-box { background-color: #f2f2f2; padding: 15px; border-radius: 8px; white-space: pre-wrap; }
+        .copy-btn { background-color: #28a745; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Social Media Content Generator</h1>
+    <form method="POST">
+        <label>Platform:</label>
+        <select name="platform">
+            <option>Instagram</option>
+            <option>Facebook</option>
+            <option>LinkedIn</option>
+            <option>Twitter</option>
+            <option>TikTok</option>
+        </select>
+
+        <label>Tone:</label>
+        <select name="tone">
+            <option>Professional</option>
+            <option>Funny</option>
+            <option>Motivational</option>
+            <option>Witty</option>
+            <option>Bold</option>
+        </select>
+
+        <label>Goal:</label>
+        <select name="goal">
+            <option>Sell a product</option>
+            <option>Engage the audience</option>
+            <option>Build authority</option>
+            <option>Inspire followers</option>
+        </select>
+
+        <label>Topic:</label>
+        <textarea name="topic" placeholder="What's the post about?" rows="4"></textarea>
+
+        <label><input type="checkbox" name="include_hashtags"> Also generate hashtags</label><br><br>
+
+        <button type="submit">Generate Post</button>
+    </form>
+
+    {% if result %}
+        <h2>Generated Post:</h2>
+        <div class="output-box" id="resultBox">{{ result }}</div>
+        <button class="copy-btn" onclick="copyText()">📋 Copy</button>
+    {% endif %}
+
+    {% if hashtags %}
+        <h3>Hashtags:</h3>
+        <div class="output-box">{{ hashtags }}</div>
+    {% endif %}
+
+    <script>
+        function copyText() {
+            const text = document.getElementById("resultBox").innerText;
+            navigator.clipboard.writeText(text);
+            alert("Post copied to clipboard!");
+        }
+    </script>
+</body>
+</html>
