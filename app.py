@@ -1,4 +1,3 @@
-
 from flask import Flask, request, render_template
 import openai
 import os
@@ -18,14 +17,14 @@ def index():
         prompt = f"Write a {tone} social media post for {platform} about: {topic}"
 
         try:
-            response = openai.ChatCompletion.create(
+            response = openai.chat.completions.create(
                 model="gpt-4",
                 messages=[
-                    {"role": "system", "content": "You are a helpful social media content assistant."},
+                    {"role": "system", "content": "You are a helpful social media assistant."},
                     {"role": "user", "content": prompt}
                 ]
             )
-            result = response['choices'][0]['message']['content'].strip()
+            result = response.choices[0].message.content.strip()
         except Exception as e:
             result = f"Error: {str(e)}"
 
